@@ -4,9 +4,11 @@ class Program
 
     static void Main()
     {
+        List<Operadores> reserva = new List<Operadores>();
         VerMenu();
         string opcion = Console.ReadLine();
-        while (opcion != "6")
+        bool salir = false;
+        while (!salir)
         {
             switch (opcion)
             {
@@ -23,10 +25,11 @@ class Program
                     Console.WriteLine("Seleccionaste la opción 4.");
                     break;
                 case "5":
-                    Console.WriteLine("Seleccionaste la opción 5.");
+                    AgregarORemover();
                     break;
                 case "6":
                     Console.WriteLine("Saliendo del programa.");
+                    salir = true;
                     break;
                 default:
                     Console.WriteLine("Opción no válida. Por favor, ingrese un número válido.");
@@ -34,6 +37,67 @@ class Program
             }
 
         }
+        void AgregarORemover()
+        {
+            bool salir = false;
+
+            while (!salir)
+            {
+                Console.WriteLine("1. Agregar operador UAV");
+                Console.WriteLine("2. Agregar operador K9");
+                Console.WriteLine("3. Agregar operador M8");
+                Console.WriteLine("4. Remover operador");
+                Console.WriteLine("5. Salir");
+
+                string select = Console.ReadLine();
+                switch (select)
+                {
+                    case "1":
+                        AgregarOpUAV();
+                        break;
+                    case "2":
+                        
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+                        RemoverOp();
+                        break;
+                    case "5":
+                        salir = true;
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. Por favor, ingrese una opción válida.");
+                        break;
+                }
+            }
+         
+            void AgregarOpUAV()
+            {
+                Console.WriteLine("Ingrese el nombre del operador: ");
+                string nombreOp = Console.ReadLine();
+                Operadores nombreOp = new Uav();
+                reserva.Add(nombreOp);
+                Console.WriteLine($"El operador '{nombreOp}' se ha agregado a la lista.");
+            }
+
+            void RemoverOp()
+            {
+                Console.Write("Ingrese el nombre del operador a remover: ");
+                string nombreOp = Console.ReadLine();
+                if (reserva.Remove(nombreOp))
+                {
+                    Console.WriteLine($"El operador '{nombreOp}' se ha removido de la lista.");
+                }
+                else
+                {
+                    Console.WriteLine($"El operador '{nombreOp}' no se encontró en la lista.");
+                }
+            }
+
+        }
+
     }
     static void VerMenu()
     {
@@ -45,23 +109,4 @@ class Program
         Console.WriteLine("5. Agregar o remover operadores de la reserva");
         Console.WriteLine("6. Salir");
     }
-    enum Estado
-    {
-        Encendido,
-        Apagado,
-        EnMovimiento
-    }
-    void ListarEstados()
-    {
-
-    }
-    void MoverOp()
-    {
-
-    }
-    void TransferirCarga()
-    {
-
-    }
 }
-
