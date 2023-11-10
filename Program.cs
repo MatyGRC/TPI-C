@@ -1,10 +1,11 @@
 ﻿using System.Runtime.CompilerServices;
+using TPI;
 class Program
 {
 
     static void Main()
     {
-        List<Operadores> reserva = new List<Operadores>();
+        List<Operador> operadores = new List<Operador>();
         VerMenu();
         string opcion = Console.ReadLine();
         bool salir = false;
@@ -13,16 +14,25 @@ class Program
             switch (opcion)
             {
                 case "1":
-                    Console.WriteLine("Seleccionaste la opción 1.");
+                    listarEstados();
                     break;
                 case "2":
-                    Console.WriteLine("Seleccionaste la opción 2.");
+                    Console.WriteLine("Selecciona localizacion");
+                    string lugar = Console.ReadLine();
+                    listarEstadosLocalizacion(lugar);
                     break;
                 case "3":
-                    Console.WriteLine("Seleccionaste la opción 3.");
+                    Console.WriteLine("W.I.P :')");
                     break;
                 case "4":
                     Console.WriteLine("Seleccionaste la opción 4.");
+                    Console.WriteLine("Elija un operador: ");
+                    for (int i = 0; i < operadores.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {operadores[i].UID}");
+                    }
+                    int op = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine($"Ha seleccionado el operador {operadores[op - 1]}");
                     break;
                 case "5":
                     AgregarORemover();
@@ -78,7 +88,7 @@ class Program
                 Console.WriteLine("Ingrese el nombre del operador: ");
                 string nombreOp = Console.ReadLine();
                 Operadores nombreOp = new Uav();
-                reserva.Add(nombreOp);
+                operadores.Add(nombreOp);
                 Console.WriteLine($"El operador '{nombreOp}' se ha agregado a la lista.");
             }
 
@@ -97,7 +107,23 @@ class Program
             }
 
         }
-
+        void listarEstados()
+        {
+            foreach (Operador o in operadores)
+            {
+                Console.WriteLine(o.GetEstado()); //No sé si deberia usar un console acá
+            }
+        }
+        void listarEstadosLocalizacion(string localizacion)
+        {
+            foreach (Operador o in operadores)
+            {
+                if (o.GetLocalidad() == localizacion)
+                {
+                    Console.WriteLine(o.GetEstado());
+                }
+            }
+        }
     }
     static void VerMenu()
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-internal class Operadores
+/*internal class Operadores
 {
     public string UID;
     public string estado;
@@ -16,7 +16,7 @@ internal class Operadores
 
         public void TransferirCarga(double cargaTransporte, string localizacionDestino)
         {   
-            /*ver funcion de movimiento (punto 1) y agregarlo al if o antes del if*/
+            ver funcion de movimiento (punto 1) y agregarlo al if o antes del if
             if (cargaTransporte >= carga && localizacionDestino != localizacion)
             {
                 localizacionDestino = localizacion;
@@ -58,10 +58,4 @@ internal class M8 : Operadores
         bateria = 12250;
         carga = 250;
     }
-}
-enum Estado
-{
-    Encendido,
-    Apagado,
-    EnMovimiento
-}
+}*/
