@@ -116,5 +116,30 @@
         carga += cargaTransporte;
     }
 
+    void VolverCuartelTransferirCargaFisica(Cuartel cuartel)
+    {
+        double distanciaLocalizacion = CalcularDistanciaACuartel();
+        this.MoverLocalidad(distanciaLocalizacion, "Cuartel General");
+        if (this.carga > 0)
+        {
+            Console.WriteLine($"Operador {this.UID} está transfiriendo toda la carga física al Cuartel General.")            Cuarteles.RecibirCarga(this);
+            this.carga = 0;
+        }
+    }
+    void VolverCuartelCargarBateria(Cuartel cuartel)
+    {
+        double distanciaLocalizacion = CalcularDistanciaACuartel();
+        this.MoverLocalidad(distanciaLocalizacion, "Cuartel General");
+        if (this.bateriaActual < this.bateria)
+        {
+            double cantidadACargar = this.bateria - this.bateriaActual;
+            Cuartel.CargarBateria(this, cantidadACargar);
+            this.bateriaActual = this.bateria;
+        }
+    }
+    private double CalcularDistanciaACuartel()
+    {
+        return localizacionDestino;
+    }
 }
 

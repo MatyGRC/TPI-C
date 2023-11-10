@@ -36,4 +36,15 @@ internal class Cuartel {
         return operadorSeleccionado;
     }
 
+    void RecibirCarga(Operador operador)
+    {
+        Console.WriteLine($"Cuartel General ha recibido toda la carga física del Operador {operador.UID}.");
+    }
+
+    public void CargarBateria(Operador operador, double miliAmper)
+    {
+        operador.GetBateria() += miliAmper;
+        Console.WriteLine($"Cuartel General ha cargado {miliAmper} mAh de batería para el Operador {operador.UID}.");
+    }
+
 }
