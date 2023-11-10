@@ -1,14 +1,14 @@
     internal abstract class Operador {
-    string UID;
+    public string UID;
     Estado estadoOperador;
-    double bateria;
-    double bateriaActual;
-    double carga;
-    double cargaActual;
-    double velocidad;
-    string localizacion;
+    public double bateria;
+    public double bateriaActual;
+    public double carga;
+    public double cargaActual;
+    public double velocidad;
+    public string localizacion;
 
-    public Operador(string UID, string estadoOperador, int bateria, int bateriaActual, double cargaMaxima, double cargaActual, double velocidad, string localizacion){
+    /*public Operador(string UID, string estadoOperador, int bateria, int bateriaActual, double cargaMaxima, double cargaActual, double velocidad, string localizacion){
         this.UID = UID;
         this.estadoOperador = estadoOperador;
         this.bateria = bateria;
@@ -17,7 +17,7 @@
         this.cargaActual = cargaActual;
         this.velocidad = velocidad;
         this.localizacion = localizacion;
-    }
+    }*/
 
     public string GetLocalidad(){return localizacion;}
     
@@ -84,19 +84,6 @@
         estadoOperador = Estado.APAGADO;
         Console.WriteLine($"El operador {UID} ha cambiado su estado a STANDBY.");
     }
-
-    public Operador SeleccionarOperadorPorUID(string uid)
-    {
-        Operador operadorSeleccionado = operadores.Find(o => o.UID == uid);
-
-        if (operadorSeleccionado == null)
-        {
-            Console.WriteLine($"No se encontró un operador con el UID {uid} en el cuartel.");
-        }
-
-        return operadorSeleccionado;
-    }
-
     public void TransferirCarga(double cargaTransporte, string localizacionDestino)
     {
         /*ver funcion de movimiento (punto 1) y agregarlo al if o antes del if*/
