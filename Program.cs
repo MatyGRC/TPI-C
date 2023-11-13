@@ -5,7 +5,8 @@ class Program
 
     static void Main()
     {
-        List<Operador> operadores = new List<Operador>();
+        //List<Operador> operadores = new List<Operador>();
+        Cuartel cuartel;
         VerMenu();
         string opcion = Console.ReadLine();
         bool salir = false;
@@ -14,12 +15,12 @@ class Program
             switch (opcion)
             {
                 case "1":
-                    listarEstados();
+                    cuartel.listarEstados();
                     break;
                 case "2":
                     Console.WriteLine("Selecciona localizacion");
                     string lugar = Console.ReadLine();
-                    listarEstadosLocalizacion(lugar);
+                    cuartel.listarEstadosLocalizacion(lugar);
                     break;
                 case "3":
                     Console.WriteLine("W.I.P :')");
@@ -88,8 +89,8 @@ class Program
                 Console.WriteLine("Ingrese el nombre del operador: ");
                 string nombreOp = Console.ReadLine();
                 Operadores nombreOp = new Uav();
-                operadores.Add(nombreOp);
-                Console.WriteLine($"El operador '{nombreOp}' se ha agregado a la lista.");
+                cuartel.agregarOperador(nombreOp)  //operadores.Add(nombreOp);
+                Console.WriteLine($"El operador '{nombreOp.GetUID()}' se ha agregado a la lista.");
             }
 
             void RemoverOp()
@@ -98,16 +99,16 @@ class Program
                 string nombreOp = Console.ReadLine();
                 if (reserva.Remove(nombreOp))
                 {
-                    Console.WriteLine($"El operador '{nombreOp}' se ha removido de la lista.");
+                    Console.WriteLine($"El operador '{nombreOp.GetUID()}' se ha removido de la lista.");
                 }
                 else
                 {
-                    Console.WriteLine($"El operador '{nombreOp}' no se encontró en la lista.");
+                    Console.WriteLine($"El operador '{nombreOp.GetUID()}' no se encontró en la lista.");
                 }
             }
 
         }
-        void listarEstados()
+        /*void listarEstados()
         {
             foreach (Operador o in operadores)
             {
@@ -123,7 +124,7 @@ class Program
                     Console.WriteLine(o.GetEstado());
                 }
             }
-        }
+        }*/
     }
     static void VerMenu()
     {

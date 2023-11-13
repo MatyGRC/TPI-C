@@ -1,5 +1,5 @@
     public enum Estado {
-        ENCENDIDO,
         ENMOVIMIENTO,
+        STANDBY,
         APAGADO
     }
