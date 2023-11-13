@@ -21,9 +21,9 @@
 
     public string GetUID() {return UID;}
 
-    public string GetLocalidad(){return localizacion;}
+    public Localidad GetLocalidad(){return localizacion;}
     
-    public double GetBateria(){return bateria;}
+    public Bateria GetBateria(){return bateria;}
 
     public double GetCarga(){return cargaActual;}
 
@@ -57,8 +57,9 @@
 
     public void transferirCargaBateria(Operador oOperador){
         if(localizacion == oOperador.GetLocalidad()){
-            oOperador.GetBateria() += bateria;
-            bateria = 0;
+            double miliAmperACargar = bateria.getBateriaActual();
+            oOperador.GetBateria() += miliAmperACargar();
+            bateria.ConsumirBateria(bateria.getBateriaActual()); //Descargo toda la bateria
             estadoOperador = Estado.APAGADO;
         }
     }
@@ -83,7 +84,7 @@
         cargaActual += cargaTransporte;
     }
 
-    void VolverCuartelTransferirCargaFisica(Cuartel cuartel)
+    void VolverCuartelTransferirCargaFisica(Cuartel cuartel, Localidad cuartelGeneral)
     {
         //double distanciaLocalizacion = CalcularDistanciaACuartel();
         this.MoverLocalidad(cuartelGeneral); //, "Cuartel General");
@@ -94,7 +95,7 @@
             this.cargaActual = 0;
         }
     }
-    void VolverCuartelCargarBateria(Cuartel cuartel)
+    void VolverCuartelCargarBateria(Cuartel cuartel, Localidad cuartelGeneral)
     {
         //double distanciaLocalizacion = CalcularDistanciaACuartel();
         this.MoverLocalidad(cuartelGeneral);

@@ -37,7 +37,7 @@ internal class Cuartel {
     public void EnviarALocalizacion(Operador oOperador, Localidad nuevaUbicacion)
     {
         oOperador.MoverLocalidad(nuevaUbicacion);
-        if (oOperador.GetLocalidad() == nuevaUbicacion && GetEstado() != Estado.APAGADO)
+        if (oOperador.GetLocalidad() == nuevaUbicacion && oOperador.GetEstado() != Estado.APAGADO)
         {
             Console.WriteLine($"El operador {oOperador.GetUID()} ha sido enviado a la ubicaci�n {nuevaUbicacion.getNombre()}.");
         }
@@ -49,8 +49,8 @@ internal class Cuartel {
 
     public void RetornoACuartel(Operador oOperador)
     {
-        oOperador.MoverLocalidad(cuartelGeneral);
-        if (MoverLocalidad(cuartelGeneral) && GetEstado() != Estado.APAGADO)
+        oOperador.MoverLocalidad(this.cuartelGeneral);
+        if (oOperador.GetLocalidad() == cuartelGeneral && oOperador.GetEstado() != Estado.APAGADO)
         {
             Console.WriteLine($"El operador {oOperador.GetUID()} ha retornado al cuartel.");
         }
