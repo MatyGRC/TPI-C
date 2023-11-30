@@ -5,6 +5,9 @@ class Program
 
     static void Main()
     {
+        Terreno terreno = new Terreno();
+        terreno.MostrarTerreno();
+
         //List<Operador> operadores = new List<Operador>();
         Cuartel cuartel;
         VerMenu();
