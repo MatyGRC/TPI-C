@@ -6,10 +6,11 @@ class Program
 
     static void Main()
     {
+        UsarTerreno();
         Terreno terreno = new Terreno();
         terreno.MostrarTerreno();
         List<Cuartel> cuartelesEnTerreno = terreno.getCuarteles();
-
+        List<Operador> operadores = new List<Operador>();
         VerMenu();
         string opcion = Console.ReadLine();
         bool salir = false;
@@ -53,6 +54,17 @@ class Program
                     break;
             }
 
+        }
+
+        void UsarTerreno()
+        {
+            Console.WriteLine("Si desea cargar terreno previo, presiona x");
+            string respuesta = Console.ReadLine();
+            if (respuesta === 'x')
+            {
+                string json = File.ReadAllText(@"./terreno.json");
+                string terrenoViejo = JsonSerializer.Deserialize<string>(json);
+            }
         }
 
         void GuardarTerreno()
@@ -105,8 +117,8 @@ class Program
             {
                 Console.WriteLine("Ingrese el nombre del operador: ");
                 string nombreOp = Console.ReadLine();
-                Operadores nombreOp = new Uav();
-                cuartel.agregarOperador(nombreOp);  //operadores.Add(nombreOp);
+                Operador add1 = new Uav(nombreOp, Estado.STANDBY, Bateria,  );
+                operadores.Add(nombreOp);  //operadores.Add(nombreOp);
                 Console.WriteLine($"El operador '{nombreOp.GetUID()}' se ha agregado a la lista.");
             }
 
