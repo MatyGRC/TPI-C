@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Text.Json;
 using TPI;
 class Program
 {
@@ -41,6 +42,9 @@ class Program
                     AgregarORemover();
                     break;
                 case "6":
+                    GuardarTerreno();
+                    break;
+                case "7":
                     Console.WriteLine("Saliendo del programa.");
                     salir = true;
                     break;
@@ -50,6 +54,17 @@ class Program
             }
 
         }
+
+        void GuardarTerreno()
+        {
+            /*string json = JsonSerializer.Serialize(terreno);
+            Console.WriteLine(json);*/
+            string fileName = "terreno.json";
+            string json = JsonSerializer.Serialize(terreno);
+
+            Console.WriteLine(File.ReadAllText(fileName));
+        }
+
         void AgregarORemover()
         {
             bool salir = false;
