@@ -1,7 +1,8 @@
   internal class M8 : Operador {
-        public M8(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual) : base(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual) {
+        public M8(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual) 
+        : base(UID, estadoOperador, bateria, cargaMaxima, cargaActual, velocidad, localizacionActual) {
             bateria = new Bateria (12250,0);
-            carga = 250;
+            cargaMaxima = 250;
         }
 
         public override void MoverTerreno(Localizacion[,] terreno, int coorX, int coorY){
@@ -20,27 +21,27 @@
             double bateriaNecesaria = miliAmper * kilometros;
             if(bateria.getBateriaActual() < bateriaNecesaria){
               Console.WriteLine("No es posible llegar al destino");
-              break;
+            
             }
         
-            int coordenadaX = localizacionActual.coordenadaX;
-            int coordenadaY = localizacionActual.coordenadaY;
-            while(localizacionActual.coordenadaX != coorX && localizacionActual.coordenadaY != coorY){
-                if(localizacionActual.coordenadaX < coorX && terreno[coordenadaX++,coordenadaY].Tipo != TipoLocalización.Lago){
+            int coordenadaX = localizacionActual.CoordenadaX;
+            int coordenadaY = localizacionActual.CoordenadaY;
+            while(localizacionActual.CoordenadaX != coorX && localizacionActual.CoordenadaY != coorY){
+                if(localizacionActual.CoordenadaX < coorX && terreno[coordenadaX++,coordenadaY].Tipo != TipoLocalizacion.Lago){
                       localizacionActual = terreno[coordenadaX++,coordenadaY];
                       bateria.ConsumirBateria(miliAmper);   
                       CheckearTerreno();
-                }else if (terreno[coordenadaX--,coordenadaY].Tipo != TipoLocalización.Lago){
+                }else if (terreno[coordenadaX--,coordenadaY].Tipo != TipoLocalizacion.Lago){
                   localizacionActual = terreno[coordenadaX--,coordenadaY];
                   bateria.ConsumirBateria(miliAmper);   
                   CheckearTerreno();
                 }
 
-                if(localizacionActual.coordenadaY < coorY && terreno[coordenadaX,coordenadaY++].Tipo != TipoLocalización.Lago){
+                if(localizacionActual.CoordenadaY < coorY && terreno[coordenadaX,coordenadaY++].Tipo != TipoLocalizacion.Lago){
                     localizacionActual = terreno[coordenadaX,coordenadaY++];
                     bateria.ConsumirBateria(miliAmper);   
                     CheckearTerreno();
-                }else if(terreno[coordenadaX,coordenadaY--].Tipo != TipoLocalización.Lago){
+                }else if(terreno[coordenadaX,coordenadaY--].Tipo != TipoLocalizacion.Lago){
                     localizacionActual = terreno[coordenadaX,coordenadaY--];
                     bateria.ConsumirBateria(miliAmper);   
                     CheckearTerreno();
@@ -48,21 +49,21 @@
 
                 //Puede ser que en direcciones verticales y horizontales tenga lagos, asi que consulto las diagonales
                 //Me disculpo por este IF
-                if(terreno[coordenadaX++,coordenadaY].Tipo == TipoLocalización.Lago &&
-                terreno[coordenadaX--,coordenadaY].Tipo == TipoLocalización.Lago &&
-                terreno[coordenadaX,coordenadaY++].Tipo == TipoLocalización.Lago &&
-                terreno[coordenadaX,coordenadaY--].Tipo == TipoLocalización.Lago
+                if(terreno[coordenadaX++,coordenadaY].Tipo == TipoLocalizacion.Lago &&
+                terreno[coordenadaX--,coordenadaY].Tipo == TipoLocalizacion.Lago &&
+                terreno[coordenadaX,coordenadaY++].Tipo == TipoLocalizacion.Lago &&
+                terreno[coordenadaX,coordenadaY--].Tipo == TipoLocalizacion.Lago
                 ){
-                  if(terreno[coordenadaX++,coordenadaY++].Tipo != TipoLocalización.Lago){
+                  if(terreno[coordenadaX++,coordenadaY++].Tipo != TipoLocalizacion.Lago){
                     localizacionActual = terreno[coordenadaX++,coordenadaY++];
                     bateria.ConsumirBateria(miliAmper);   
                     CheckearTerreno();
-                  }else if(terreno[coordenadaX++,coordenadaY--].Tipo != TipoLocalización.Lago){
+                  }else if(terreno[coordenadaX++,coordenadaY--].Tipo != TipoLocalizacion.Lago){
                     localizacionActual = terreno[coordenadaX++,coordenadaY--];
                     bateria.ConsumirBateria(miliAmper);   
                     CheckearTerreno();
                   }
-                  else if(terreno[coordenadaX--,coordenadaY++].Tipo != TipoLocalización.Lago){
+                  else if(terreno[coordenadaX--,coordenadaY++].Tipo != TipoLocalizacion.Lago){
                     localizacionActual = terreno[coordenadaX++,coordenadaY--];
                     bateria.ConsumirBateria(miliAmper);   
                     CheckearTerreno();

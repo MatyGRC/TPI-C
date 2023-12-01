@@ -1,7 +1,9 @@
  internal class Uav : Operador{
-        public Uav(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual) : base(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual) {
+        public Uav(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual)
+        : base(UID, estadoOperador, bateria, cargaMaxima, cargaActual, velocidad, localizacionActual)
+        {
             bateria = new Bateria (4000,0);
-            carga = 5;
+            cargaMaxima = 5;
         }
 
         public override void MoverTerreno(Localizacion[,] terreno, int coorX, int coorY){
@@ -21,7 +23,6 @@
             double bateriaNecesaria = miliAmper * kilometros;
             if(bateria.getBateriaActual() < bateriaNecesaria){
               Console.WriteLine("No es posible llegar al destino");
-              break;
             }
         
             int coordenadaX = localizacionActual.coordenadaX;

@@ -7,9 +7,8 @@ class Program
     {
         Terreno terreno = new Terreno();
         terreno.MostrarTerreno();
+        List<Cuartel> cuartelesEnTerreno = terreno.getCuarteles();
 
-        //List<Operador> operadores = new List<Operador>();
-        Cuartel cuartel;
         VerMenu();
         string opcion = Console.ReadLine();
         bool salir = false;
@@ -92,7 +91,7 @@ class Program
                 Console.WriteLine("Ingrese el nombre del operador: ");
                 string nombreOp = Console.ReadLine();
                 Operadores nombreOp = new Uav();
-                cuartel.agregarOperador(nombreOp)  //operadores.Add(nombreOp);
+                cuartel.agregarOperador(nombreOp);  //operadores.Add(nombreOp);
                 Console.WriteLine($"El operador '{nombreOp.GetUID()}' se ha agregado a la lista.");
             }
 
@@ -102,7 +101,7 @@ class Program
                 string nombreOp = Console.ReadLine();
                 if (reserva.Remove(nombreOp))
                 {
-                    Console.WriteLine($"El operador '{nombreOp.GetUID()}' se ha removido de la lista.");
+                    Console.WriteLine($"El operador '{nombreOp.GetUID}' se ha removido de la lista.");
                 }
                 else
                 {

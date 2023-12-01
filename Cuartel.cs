@@ -1,14 +1,67 @@
-using TPI;
 internal class Cuartel : Localizacion {
       List <Operador> operadores;
       double carga;
-      public Cuartel(List <Operador> operadores, double carga) :base(TipoLocalizacion Tipo){
+              
+      public Cuartel(List <Operador> operadores, double carga, TipoLocalizacion tipo, int x, int y): base(tipo, x, y)
+      {
         this.operadores = operadores;
         this.carga = carga;
-        this.Tipo = TipoLocalizacion.Cuartel;       //new Localidad ("CuartelGeneral" ,0);
-      }
+        this.Tipo = tipo;
+        this.CoordenadaX = x;
+        this.CoordenadaY = y;
+        inicializarOperadorM8();
+        inicializarOperadorK9();
+        inicializarOperadorUAV();
+    }
 
-      public void listarEstados(){
+    private void inicializarOperadorM8()
+    {
+        string uid = "M8-1"; // primer m8
+        Estado estadoOperador = Estado.STANDBY; 
+        Bateria bateria = new Bateria(12250, 0);
+        double cargaMaxima = 250;
+        double cargaActual = 0; 
+        double velocidad = 10; 
+        Localizacion localizacionActual = this; // La localización inicial es el cuartel
+
+        M8 operadorM8 = new M8(uid, estadoOperador, bateria, cargaMaxima, cargaActual, velocidad, localizacionActual);
+
+        operadores.Add(operadorM8);
+    }
+
+    private void inicializarOperadorK9()
+    {
+        string uid = "K9-1"; // primer k9
+        Estado estadoOperador = Estado.STANDBY;
+        Bateria bateria = new Bateria(6500, 0);
+        double cargaMaxima = 40;
+        double cargaActual = 0;
+        double velocidad = 15;
+        Localizacion localizacionActual = this; // La localización inicial es el cuartel
+
+        M8 operadorM8 = new M8(uid, estadoOperador, bateria, cargaMaxima, cargaActual, velocidad, localizacionActual);
+
+        operadores.Add(operadorM8);
+    }
+
+    private void inicializarOperadorUAV()
+    {
+        string uid = "UAV-1"; // primer uav
+        Estado estadoOperador = Estado.STANDBY;
+        Bateria bateria = new Bateria(4000, 0);
+        double cargaMaxima = 5;
+        double cargaActual = 0;
+        double velocidad = 20;
+        Localizacion localizacionActual = this; // La localización inicial es el cuartel
+
+        M8 operadorM8 = new M8(uid, estadoOperador, bateria, cargaMaxima, cargaActual, velocidad, localizacionActual);
+
+        operadores.Add(operadorM8);
+    }
+
+
+
+    public void listarEstados(){
         foreach (Operador o in operadores){
             Console.WriteLine(o.GetEstado());
         }
@@ -16,7 +69,7 @@ internal class Cuartel : Localizacion {
 
       public void listarEstadosLocalizacion(int coorX, int coorY){
         foreach (Operador o in operadores){
-            if(o.GetLocalizacion().coordenadaX == coorX && o.GetLocalizacion().coordenadaY == coorY){
+            if(o.GetLocalizacion().CoordenadaX == coorX && o.GetLocalizacion().CoordenadaY == coorY){
                 Console.WriteLine(o.GetEstado());
             }
         }
@@ -48,7 +101,7 @@ internal class Cuartel : Localizacion {
 
     public void RetornoACuartel(Operador oOperador, Localizacion[,] terreno)
     {
-        oOperador.MoverTerreno(terreno, coordenadaX, coordenadaY);
+        oOperador.MoverTerreno(terreno, CoordenadaX, CoordenadaY);
         if (oOperador.GetLocalizacion() == this && oOperador.GetEstado() != Estado.APAGADO)
         {
             Console.WriteLine($"El operador {oOperador.GetUID()} ha retornado al cuartel.");
@@ -61,8 +114,8 @@ internal class Cuartel : Localizacion {
 
     public void CambiarEstadoAStandby(Operador oOperador)
     {
-        oOperador.GetEstado() = Estado.STANDBY;
-        Console.WriteLine($"El operador {UID} ha cambiado su estado a STANDBY.");
+        oOperador.SetEstado(Estado.STANDBY);
+        Console.WriteLine($"El operador {oOperador.GetUID} ha cambiado su estado a STANDBY.");
     }
 
 
@@ -83,7 +136,7 @@ internal class Cuartel : Localizacion {
         operadores.Add(oOperador);
       }
 
-    public void removerOperador(Operador oOperador) {
+     public void removerOperador(Operador oOperador) {
       operadores.Remove(oOperador);
     }
 }

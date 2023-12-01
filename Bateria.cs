@@ -3,10 +3,10 @@ internal class Bateria{
     bool bateriaDañada = false;
     public Bateria(double bateriaMaxima, double bateriaActual){
         this.bateriaActual=bateriaActual;
-        this.bateriaMaxima=bateriaMaxima
+        this.bateriaMaxima = bateriaMaxima;
     }
-   
-    public double getBateriaActual() return bateriaActual;
+
+    public double getBateriaActual() { return bateriaActual; }
     public void CargarBateria(){
         bateriaActual = bateriaMaxima;
     }

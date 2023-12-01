@@ -1,16 +1,17 @@
-class Localizacion
+internal class Localizacion
 {
-    public TipoLocalizacion Tipo { get; set; } //se generan solos los getters y setters
-    int coordenadaX { get; set; }
-    int coordenadaY {get; set;}
-    public Localizacion(TipoLocalizacion tipo, int X, int Y)
+    public TipoLocalizacion Tipo { get; set; } // se generan solos los getters y setters
+    public int CoordenadaX { get; set; }
+    public int CoordenadaY { get; set; }
+
+    public Localizacion(TipoLocalizacion tipo, int x, int y)
     {
         Tipo = tipo;
-        coordenadaX = X;
-        coordenadaY = Y;
+        CoordenadaX = x;
+        CoordenadaY = y;
     }
     public double calcularDistanciaViaje(int coordenadaXDestino, int coordenadaYDestino){
-        double distancia = Math.Abs(coordenadaXDestino-coordenadaX) + Math.Abs(coordenadaYDestino-coordenadaY);
+        double distancia = Math.Abs(coordenadaXDestino-CoordenadaX) + Math.Abs(coordenadaYDestino-CoordenadaY);
         return distancia;
     }
 }

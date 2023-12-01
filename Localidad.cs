@@ -11,6 +11,6 @@ internal class Localidad{
     public string getNombre() {return nombre;}
 
     public double calcularDistanciaViaje(Localidad oLocalidad){
-        return Math.Abs(distanciaACuartel - oLocalidad.getDistancia();)
+        return Math.Abs(distanciaACuartel - oLocalidad.getDistancia());
     }
 }

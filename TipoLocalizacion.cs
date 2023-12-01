@@ -1,6 +1,6 @@
 ﻿using System;
 
-enum TipoLocalización
+internal enum TipoLocalizacion
 {
     TerrenoBaldio,
     Planicie,

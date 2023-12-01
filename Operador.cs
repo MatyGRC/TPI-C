@@ -1,19 +1,19 @@
     internal abstract class Operador {
-    string UID;
-    Estado estadoOperador;
+    protected string UID;
+    protected Estado estadoOperador;
     //public double bateria;
-    Daño dañoOperador = Daño.NINGUNO;
-    Bateria bateria;
-    double cargaMaxima;
-    double cargaActual;
-    double velocidad;
-    Localizacion localizacionActual;//string localizacion;
+    protected Daño dañoOperador = Daño.NINGUNO;
+    protected Bateria bateria;
+    protected double cargaMaxima;
+    protected double cargaActual;
+    protected double velocidad;
+    protected Localizacion localizacionActual;//string localizacion;
 
     public Operador(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual){
         this.UID = UID;
         this.estadoOperador = estadoOperador;
         this.bateria = bateria;
-        this.bateriaActual = bateriaActual;
+        //this.bateriaActual = bateriaActual;
         this.cargaMaxima = cargaMaxima;
         this.cargaActual = cargaActual;
         this.velocidad = velocidad;
@@ -31,10 +31,15 @@
     public Estado GetEstado(){
         if(cargaActual > 0){
             estadoOperador = Estado.ENMOVIMIENTO;
-        } else if(bateria > 0) {
+        } else if(bateria.getBateriaActual() > 0) {
             estadoOperador = Estado.STANDBY;
         } else { estadoOperador = Estado.APAGADO; }
         return estadoOperador;
+    }
+
+    public void SetEstado(Estado nuevoEstado)
+    {
+        estadoOperador = nuevoEstado;
     }
 
     public virtual void MoverTerreno(Localizacion[,] terreno, int coorX, int coorY);
@@ -55,7 +60,7 @@
         /*ver funcion de movimiento (punto 1) y agregarlo al if o antes del if*/
         if (cargaTransporte <= cargaMaxima && localizacionDestino != localizacionActual && dañoOperador != Daño.SERVO_ATASCADO)
         {
-            this.MoverTerreno(terreno,coorX,coorY)
+            this.MoverTerreno(terreno, coorX, coorY);
             Console.WriteLine("La carga ha sido transferida");
         }
         else
