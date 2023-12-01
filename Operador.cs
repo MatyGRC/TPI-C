@@ -148,6 +148,16 @@
                break;
         }
     }
+
+    public void RepararOperador(){
+        if(dañoOperador == Daño.MOTOR_COMPROMETIDO){
+           velocidad *= 2;
+        }
+        if(bateria.bateriaDañada){
+            CambiarBateria();
+        }
+        dañoOperador = Daño.NINGUNO;
+    }
 }
 
 

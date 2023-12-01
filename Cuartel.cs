@@ -139,4 +139,13 @@ internal class Cuartel : Localizacion {
      public void removerOperador(Operador oOperador) {
       operadores.Remove(oOperador);
     }
+
+    public void RetornarOperadoresDañados(Localizacion[,] terreno){
+        foreach (Operador o in operadores){
+            if(o.estadoOperador == Estado.DAÑADO){
+                RetornoACuartel(o,terreno);
+                o.RepararOperador();
+            }
+        }
+    }
 }
