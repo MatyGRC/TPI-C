@@ -20,12 +20,12 @@ public class Terreno
         {
             for (int j = 0; j < TamanoTerreno; j++)
             {
-                terreno[i, j] = GenerarLocalizacionAleatoria();
+                terreno[i, j] = GenerarLocalizacionAleatoria(i,j);
             }
         }
     }
 
-    private Localizacion GenerarLocalizacionAleatoria()
+    private Localizacion GenerarLocalizacionAleatoria(int coordenadaX, int coordenadaY)
     {
         TipoLocalizacion tipo = (TipoLocalizacion)random.Next(Enum.GetNames(typeof(TipoLocalizacion)).Length); //me da la cantidad de enums
 
@@ -34,7 +34,7 @@ public class Terreno
             if (cuartelesActuales < 3)
             {
                 cuartelesActuales++;
-                return new Localizacion(tipo);
+                return new Localizacion(tipo,coordenadaX,coordenadaY);
             }
             else
             {
@@ -46,7 +46,7 @@ public class Terreno
             if (sitiosReciclajeActuales < 5)
             {
                 sitiosReciclajeActuales++;
-                return new Localizacion(tipo);
+                return new Localizacion(tipo,coordenadaX,coordenadaY);
             }
             else
             {
@@ -55,10 +55,11 @@ public class Terreno
         }
         else
         {
-            return new Localizacion(tipo);
+            return new Localizacion(tipo,coordenadaX,coordenadaY);
         }
     }
 
+    public void calcularVertederoCercano()
     public void MostrarTerreno()
     {
         for (int i = 0; i < TamanoTerreno; i++)
@@ -71,5 +72,4 @@ public class Terreno
         }
     }
 
-}
 }

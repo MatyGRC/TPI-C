@@ -1,0 +1,8 @@
+  public enum Daño {
+        NINGUNO,
+        MOTOR_COMPROMETIDO,
+        SERVO_ATASCADO,
+        BATERIA_PERFORADA,
+        PUERTO_BATERIA_DESCONECTADO,
+        PINTURA_RAYADA
+    }

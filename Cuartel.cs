@@ -1,17 +1,17 @@
 using TPI;
 internal class Cuartel {
       List <Operador> operadores;
-      Localidad cuartelGeneral;
+      Localizacion localizacionCuartel;
       double carga;
-      public Cuartel(List <Operador> operadores, double carga){
+      public Cuartel(List <Operador> operadores, double carga, Localizacion localizacionCuartel){
         this.operadores = operadores;
         this.carga = carga;
-        cuartelGeneral = new Localidad ("CuartelGeneral" ,0);
+        this.localizacionCuartel = localizacionCuartel;       //new Localidad ("CuartelGeneral" ,0);
       }
 
       public void listarEstados(){
         foreach (Operador o in operadores){
-            Console.WriteLine(o.GetEstado()); //No sé si deberia usar un console acá
+            Console.WriteLine(o.GetEstado());
         }
       }
 
@@ -47,10 +47,10 @@ internal class Cuartel {
         }
     }
 
-    public void RetornoACuartel(Operador oOperador)
+    public void RetornoACuartel(Operador oOperador, Localizacion[,] terreno)
     {
-        oOperador.MoverLocalidad(this.cuartelGeneral);
-        if (oOperador.GetLocalidad() == cuartelGeneral && oOperador.GetEstado() != Estado.APAGADO)
+        oOperador.MoverTerreno(terreno, localizacionCuartel.coordenadaX, localizacionCuartel.coordenadaY);
+        if (oOperador.GetLocalidad() == localizacionCuartel && oOperador.GetEstado() != Estado.APAGADO)
         {
             Console.WriteLine($"El operador {oOperador.GetUID()} ha retornado al cuartel.");
         }
