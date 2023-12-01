@@ -1,5 +1,5 @@
   internal class K9 : Operador{
-    public K9()
+    public K9(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual) : base(string UID, Estado estadoOperador, Bateria bateria, double cargaMaxima, double cargaActual, double velocidad, Localizacion localizacionActual)
     {
         bateria = new Bateria (6500,0);
         carga = 40;

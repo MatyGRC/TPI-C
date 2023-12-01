@@ -1,12 +1,11 @@
 using TPI;
-internal class Cuartel {
+internal class Cuartel : Localizacion {
       List <Operador> operadores;
-      Localizacion localizacionCuartel;
       double carga;
-      public Cuartel(List <Operador> operadores, double carga, Localizacion localizacionCuartel){
+      public Cuartel(List <Operador> operadores, double carga) :base(TipoLocalizacion Tipo){
         this.operadores = operadores;
         this.carga = carga;
-        this.localizacionCuartel = localizacionCuartel;       //new Localidad ("CuartelGeneral" ,0);
+        this.Tipo = TipoLocalizacion.Cuartel;       //new Localidad ("CuartelGeneral" ,0);
       }
 
       public void listarEstados(){
@@ -15,9 +14,9 @@ internal class Cuartel {
         }
       }
 
-      public void listarEstadosLocalizacion(string localizacion){
+      public void listarEstadosLocalizacion(int coorX, int coorY){
         foreach (Operador o in operadores){
-            if(o.GetLocalidad().getNombre() == localizacion){
+            if(o.GetLocalizacion().coordenadaX == coorX && o.GetLocalizacion().coordenadaY == coorY){
                 Console.WriteLine(o.GetEstado());
             }
         }
@@ -34,23 +33,23 @@ internal class Cuartel {
 
         return operadorSeleccionado;
     }
-    public void EnviarALocalizacion(Operador oOperador, Localidad nuevaUbicacion)
+    public void EnviarALocalizacion(Operador oOperador, Localizacion[,] terreno, int coorX, int coorY)
     {
-        oOperador.MoverLocalidad(nuevaUbicacion);
-        if (oOperador.GetLocalidad() == nuevaUbicacion && oOperador.GetEstado() != Estado.APAGADO)
+        oOperador.MoverTerreno(terreno,coorX,coorY);
+        if (oOperador.GetLocalizacion() == terreno[coorX,coorY] && oOperador.GetEstado() != Estado.APAGADO)
         {
-            Console.WriteLine($"El operador {oOperador.GetUID()} ha sido enviado a la ubicaci�n {nuevaUbicacion.getNombre()}.");
+            Console.WriteLine($"El operador {oOperador.GetUID()} ha sido enviado a la nueva localizacion.");
         }
         else
         {
-            Console.WriteLine($"No hay suficiente bater�a para enviar el operador {oOperador.GetUID()} a la ubicaci�n {nuevaUbicacion.getNombre()}.");
+            Console.WriteLine($"No hay suficiente bater�a para enviar el operador {oOperador.GetUID()} a la localizacion destino.");
         }
     }
 
     public void RetornoACuartel(Operador oOperador, Localizacion[,] terreno)
     {
-        oOperador.MoverTerreno(terreno, localizacionCuartel.coordenadaX, localizacionCuartel.coordenadaY);
-        if (oOperador.GetLocalidad() == localizacionCuartel && oOperador.GetEstado() != Estado.APAGADO)
+        oOperador.MoverTerreno(terreno, coordenadaX, coordenadaY);
+        if (oOperador.GetLocalizacion() == this && oOperador.GetEstado() != Estado.APAGADO)
         {
             Console.WriteLine($"El operador {oOperador.GetUID()} ha retornado al cuartel.");
         }

@@ -37,28 +37,10 @@
         return estadoOperador;
     }
 
-    public void MoverLocalidad(Localidad localizacionDestino){
-        //bool desplazamiento = false;
-        double porcentaje = cargaMaxima * 0.1;
-        double cargaPorcentual = cargaActual;
-        double velocidadActual = velocidad;
-        while(cargaPorcentual-porcentaje < 0){
-            cargaPorcentual -= porcentaje;
-            velocidadActual -= velocidad * 0.05;
-        }
-        double kilometros = localizacion.calcularDistanciaViaje(localizacionDestino);
-        double miliAmper = (kilometros / velocidadActual) * 1000; //Cada hora de consumo son 1000 miliAmperios, entonces multiplico la cantidad de horas por mil    
-        
-        bateria.ConsumirBateria(miliAmper);           //bateria -= tiempo * 1000;  
-        if (bateria.getBateriaActual() > 0){ //Pregunto si tiene suficiente bateria para llegar al destino
-            localizacion = localizacionDestino;
-            //desplazamiento = true;
-        }
-        //return desplazamiento;
-    }
+    public virtual void MoverTerreno(Localizacion[,] terreno, int coorX, int coorY);
 
     public void transferirCargaBateria(Operador oOperador){
-        if(localizacionActual == oOperador.GetLocalizacion()){
+        if(localizacionActual == oOperador.GetLocalizacion() && dañoOperador != Daño.PUERTO_BATERIA_DESCONECTADO){
             double miliAmperACargar = bateria.getBateriaActual();
             oOperador.GetBateria() += miliAmperACargar();
             bateria.ConsumirBateria(bateria.getBateriaActual()); //Descargo toda la bateria
@@ -67,13 +49,14 @@
     }
 
    
-    public void TransferirCarga(double cargaTransporte, Localidad localizacionDestino)
+    public void TransferirCarga(double cargaTransporte, Localizacion[,] terreno, int coorX, int coorY)
     {
+        Localizacion localizacionDestino = terreno[coorX,coorY];
         /*ver funcion de movimiento (punto 1) y agregarlo al if o antes del if*/
-        if (cargaTransporte <= cargaMaxima && localizacionDestino.getNombre() != localizacion.getNombre())
+        if (cargaTransporte <= cargaMaxima && localizacionDestino != localizacionActual && dañoOperador != Daño.SERVO_ATASCADO)
         {
-            this.MoverLocalidad(localizacionDestino)
-            Console.WriteLine($"La carga ha sido transferida {localizacionDestino.getNombre()}");
+            this.MoverTerreno(terreno,coorX,coorY)
+            Console.WriteLine("La carga ha sido transferida");
         }
         else
         {
@@ -83,26 +66,31 @@
 
     public void RecibirCarga(double cargaTransporte)
     {
-        cargaActual += cargaTransporte;
+        if(dañoOperador != Daño.SERVO_ATASCADO){
+            cargaActual += cargaTransporte;
+        }
     }
 
-    void VolverCuartelTransferirCargaFisica(Cuartel cuartel, Localidad cuartelGeneral)
+    void VolverCuartelTransferirCargaFisica(Localizacion[,] terreno, int coorX, int coorY)
     {
         //double distanciaLocalizacion = CalcularDistanciaACuartel();
-        this.MoverLocalidad(cuartelGeneral); //, "Cuartel General");
-        if (this.cargaActual > 0)
+        this.MoverTerreno(terreno,coorX,coorY); //, "Cuartel General");
+        if (this.cargaActual > 0 && dañoOperador != Daño.SERVO_ATASCADO)
         {
             Console.WriteLine($"Operador {this.UID} est� transfiriendo toda la carga f�sica al Cuartel General.")            
-            cuartel.RecibirCarga(this);
+            terreno[coorX,coorY].RecibirCarga(this);
             this.cargaActual = 0;
         }
     }
-    void VolverCuartelCargarBateria(Cuartel cuartel, Localidad cuartelGeneral)
+    void VolverCuartelCargarBateria(Localizacion[,] terreno, int coorX, int coorY)
     {
-        //double distanciaLocalizacion = CalcularDistanciaACuartel();
-        this.MoverLocalidad(cuartelGeneral);
-        bateria.CargarBateria();
-        Console.WriteLine($"Cuartel General ha cargado la batería del Operador {UID}.");
+        
+        this.MoverTerreno(terreno,coorX,coorY);
+        if(dañoOperador != Daño.PUERTO_BATERIA_DESCONECTADO){
+           bateria.CargarBateria();
+           Console.WriteLine($"Cuartel General ha cargado la batería del Operador {UID}.");
+        }
+ 
         /*if (this.bateriaActual < this.bateria)
         {
             double cantidadACargar = this.bateria - this.bateriaActual;
@@ -152,9 +140,6 @@
                break;
             case 5:
                dañoOperador = Daño.PINTURA_RAYADA;
-               break;
-            default:
-               dañoOperador = Daño.NINGUNO;
                break;
         }
     }
