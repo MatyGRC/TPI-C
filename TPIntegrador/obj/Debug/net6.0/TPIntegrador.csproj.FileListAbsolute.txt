@@ -1,0 +1,14 @@
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\bin\Debug\net6.0\TPIntegrador.exe
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\bin\Debug\net6.0\TPIntegrador.deps.json
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\bin\Debug\net6.0\TPIntegrador.runtimeconfig.json
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\bin\Debug\net6.0\TPIntegrador.dll
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\bin\Debug\net6.0\TPIntegrador.pdb
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\TPIntegrador.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\TPIntegrador.AssemblyInfoInputs.cache
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\TPIntegrador.AssemblyInfo.cs
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\TPIntegrador.csproj.CoreCompileInputs.cache
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\TPIntegrador.dll
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\refint\TPIntegrador.dll
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\TPIntegrador.pdb
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\TPIntegrador.genruntimeconfig.cache
+C:\Users\Elián\source\repos\TPIntegrador\TPIntegrador\obj\Debug\net6.0\ref\TPIntegrador.dll
