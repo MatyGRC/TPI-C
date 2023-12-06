@@ -87,10 +87,12 @@ class Program
                 default:
                     Console.WriteLine("Opción no válida. Intente de nuevo.");
                     break;
-            }
+            } while (opcion != 0) ;
 
-        } while (opcion != 0);
+        }
     }
+
+
 
     static void UsarTerreno()
     {
@@ -110,3 +112,4 @@ class Program
         File.WriteAllText(fileName, json);
     }
 }
+
