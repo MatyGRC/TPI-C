@@ -74,7 +74,9 @@ namespace TPIntegrador.Objectos.Mapa
 
         public void calcularVertederoCercano()
         {
-
+            foreach (Cuartel oCuartel in cuartelesEnTerreno){
+                oCuartel.MandarVertedero();
+            }
         }
         public void MostrarTerreno()
         {

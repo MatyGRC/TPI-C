@@ -166,6 +166,17 @@ namespace TPIntegrador.Objectos.Mapa
             operadores.Remove(oOperador);
         }
 
+        public void MandarVertedero(Localizacion[,] terreno){
+            foreach (Operador o in operadores){
+                if(o.GetEstado() == Estado.STANDBY){
+                    Localizacion vertederoCercano = o.localizacionActual.buscarVertedero(terreno);
+                    int coorX = vertederoCercano.CoordenadaX;
+                    int coorY = vertederoCercano.CoordenadaY;
+                    o.MoverTerreno(terreno,coorX,coorY);
+                }
+            }
+        }
+
         public void RetornarOperadoresDañados(Localizacion[,] terreno)
         {
             foreach (Operador o in operadores)
